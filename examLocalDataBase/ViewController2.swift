@@ -7,23 +7,32 @@
 
 import UIKit
 
-class ViewController2: UIViewController {
+class ViewController2: UIViewController,UITableViewDataSource,UITableViewDelegate {
+  
+    @IBOutlet weak var tabelView: UITableView!
+    var arr2 = Sqlite.getData()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return arr2.count
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MyTableViewCell
+        
+        cell.lable1.text = arr2[indexPath.row].id.description
+        cell.label2.text = arr2[indexPath.row].name
+        
+        return cell
     }
-    */
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
+    }
+
+    
 
 }
